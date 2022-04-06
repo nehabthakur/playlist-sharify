@@ -19,6 +19,7 @@ def sign_up() -> Response:
     return sign_up_user(request.get_json(), app.config['MONGO_CREDS'])
 
 
+@auth.login_required
 @app.route("/playlist", methods=["GET", "PUT", "POST", "DELETE"])
 def playlist() -> Response:
     match request.method:
@@ -32,6 +33,7 @@ def playlist() -> Response:
             return delete_playlist(request.get_json(), app.config['MONGO_CREDS'])
 
 
+@auth.login_required
 @app.route("/song", methods=["GET"])
 def song() -> Response:
     return get_song(request.get_json(), app.config['MONGO_CREDS'], app.config["API_CREDS"])
