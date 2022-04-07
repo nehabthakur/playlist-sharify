@@ -8,7 +8,6 @@ steps:
         sed -ie "s@<IMAGE>@$(echo ${_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:latest)@g" tools/k8s/gke/01-deployment.yaml
         sed -ie "s@<API_CREDS>@$(echo $$API_CREDS)@g" tools/k8s/gke/01-deployment.yaml
         sed -ie "s@<MONGO_CREDS>@$(echo $$MONGO_CREDS)@g" tools/k8s/gke/01-deployment.yaml
-        cat tools/k8s/gke/01-deployment.yaml
 
     secretEnv: ['API_CREDS', 'MONGO_CREDS']
 

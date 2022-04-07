@@ -1,8 +1,8 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: playlist-sharify-service
+  name: playlist-sharify-service-ingress
 spec:
   backend:
-    serviceName: web
+    serviceName: playlist-sharify-service
     servicePort: 5000
