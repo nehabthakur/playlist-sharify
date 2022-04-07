@@ -28,7 +28,7 @@ def playlist() -> Response:
         case "PUT":
             return put_playlist(request.get_json(), app.config['MONGO_CREDS'])
         case "POST":
-            return post_playlist(request.get_json(), app.config['MONGO_CREDS'])
+            return post_playlist(request.get_json(), app.config['MONGO_CREDS'], app.config["API_CREDS"])
         case "DELETE":
             return delete_playlist(request.get_json(), app.config['MONGO_CREDS'])
 

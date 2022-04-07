@@ -36,7 +36,7 @@ class MongoHelper:
             logging.warning(f'_id not set for {database}.{collection}')
 
         collection = self._get_collection(database, collection)
-        collection.insert_one(record)
+        collection.replace_one({"_id": record["_id"]}, record, upsert=True)
 
     def get_doc(self, database: str, collection: str, query: dict[str, any]) -> dict[str, any] | None:
         collection = self._get_collection(database, collection)
