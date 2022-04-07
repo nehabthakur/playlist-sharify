@@ -1,11 +1,9 @@
 steps:
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'gcloud'
+  - name: bash
     args:
-      - '-eEuo'
-      - 'pipefail'
-      - '-c'
+      - -c
       - |-
+        set -euxo pipefail
         # Substituting template variables in kubernetes yaml files
         sed -ie "s@<IMAGE>@$(echo ${_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:latest)@g" tools/k8s/gke/01-deployment.yaml
         sed -ie "s@<API_CREDS>@$(echo $$API_CREDS)@g" tools/k8s/gke/01-deployment.yaml
