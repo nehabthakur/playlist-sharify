@@ -33,6 +33,6 @@ spec:
           args: [ "app/main.py" ]
           env:
             - name: API_CREDS
-              value: "<API_CREDS>"
+              value: '<API_CREDS>'
             - name: MONGO_CREDS
-              value: "<MONGO_CREDS>"
+              value: '<MONGO_CREDS>'
