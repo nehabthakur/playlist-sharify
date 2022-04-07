@@ -33,9 +33,9 @@ steps:
       - --location=${_LOCATION}
       - --cluster=${_GKE_CLUSTER_ID}
 
-  availableSecrets:
-    secretManager:
-      - versionName: projects/${PROJECT_ID}/secrets/{_API_SECRET}/versions/{_API_SECRET_VERSION}
-        env: 'API_CREDS'
-      - versionName: projects/${PROJECT_ID}/secrets/{_MONGO_DB_SECRET}/versions/{_MONGO_DB_SECRET_VERSION}
-        env: 'MONGO_CREDS'
+availableSecrets:
+  secretManager:
+    - versionName: projects/${PROJECT_ID}/secrets/{_API_SECRET}/versions/{_API_SECRET_VERSION}
+      env: 'API_CREDS'
+    - versionName: projects/${PROJECT_ID}/secrets/{_MONGO_DB_SECRET}/versions/{_MONGO_DB_SECRET_VERSION}
+      env: 'MONGO_CREDS'
