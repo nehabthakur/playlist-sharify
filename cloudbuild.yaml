@@ -1,4 +1,17 @@
 steps:
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - '-eEuo'
+      - 'pipefail'
+      - '-c'
+      - |-
+        # Substituting template variables in kubernetes yaml files
+        sed -ie "s@<IMAGE>@$(echo ${_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:latest)@g" tools/k8s/gke/01-deployment.yaml
+        sed -ie "s@<API_CREDS>@$(echo $$API_CREDS)@g" tools/k8s/gke/01-deployment.yaml
+        sed -ie "s@<MONGO_CREDS>@$(echo $$MONGO_CREDS)@g" tools/k8s/gke/01-deployment.yaml
+    secretEnv: ['API_CREDS', 'MONGO_CREDS']
+
   - name: gcr.io/cloud-builders/docker
     args: 
       - build
@@ -16,6 +29,13 @@ steps:
   - name: gcr.io/cloud-builders/gke-deploy
     args:
       - run
-      - --filename=tools/k8s/
+      - --filename=tools/k8s/gke
       - --location=${_LOCATION}
       - --cluster=${_GKE_CLUSTER_ID}
+
+  availableSecrets:
+    secretManager:
+      - versionName: projects/${PROJECT_ID}/secrets/{_API_SECRET}/versions/{_API_SECRET_VERSION}
+        env: 'API_CREDS'
+      - versionName: projects/${PROJECT_ID}/secrets/{_MONGO_DB_SECRET}/versions/{_MONGO_DB_SECRET_VERSION}
+        env: 'MONGO_CREDS'

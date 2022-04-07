@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: playlist-sharify-deployment
+  namespace: playlist-sharify
+  labels:
+    app: playlist-sharify-app
+spec:
+  revisionHistoryLimit: 0
+  replicas: 1
+  selector:
+    matchLabels:
+      app: playlist-sharify-app
+  template:
+    metadata:
+      labels:
+        app: playlist-sharify-app
+    spec:
+      containers:
+        - name: playlist-sharify-service
+          image: <IMAGE>
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+          resources:
+            limits:
+              cpu: "0.5"
+              memory: "256Mi"
+            requests:
+              cpu: "0.5"
+              memory: "256Mi"
+          command: [ "python" ]
+          args: [ "app/main.py" ]
+          env:
+            - name: API_CREDS
+              value: <API_CREDS>
+            - name: MONGO_CREDS
+              value: <MONGO_CREDS>

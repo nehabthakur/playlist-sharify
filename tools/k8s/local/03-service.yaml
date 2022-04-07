@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: playlist-sharify-service
+  namespace: playlist-sharify
+spec:
+  ports:
+    - port: 5000
+      protocol: TCP
+      targetPort: 5000
+  selector:
+    app: playlist-sharify-app
+  type: LoadBalancer
