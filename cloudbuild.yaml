@@ -1,10 +1,21 @@
 steps:
-  - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-f', 'tools/docker/Dockerfile', '-t', '${_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:latest', '.' ]
-images: '${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/${_IMAGE}:latest'
-  - name: "gcr.io/cloud-builders/gke-deploy"
+  - name: gcr.io/cloud-builders/docker
+    args: 
+      - build
+      - -f
+      - tools/docker/Dockerfile
+      - -t
+      - ${_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:latest
+      - .
+
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - ${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/${_IMAGE}:latest
+
+  - name: gcr.io/cloud-builders/gke-deploy
     args:
       - run
-      - --filename='tools/k8s/'
+      - --filename=tools/k8s/
       - --location=${_LOCATION}
       - --cluster=${_GKE_CLUSTER_ID}
