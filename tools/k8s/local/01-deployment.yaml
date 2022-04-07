@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: playlist-sharify-service
-          image: <IMAGE>
+          image: playlist-sharify:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 5000
@@ -33,6 +33,6 @@ spec:
           args: [ "app/main.py" ]
           env:
             - name: API_CREDS
-              value: <API_CREDS>
+              value: # placeholder update this
             - name: MONGO_CREDS
-              value: <MONGO_CREDS>
+              value: # placeholder update this
