@@ -25,14 +25,14 @@ spec:
           resources:
             limits:
               cpu: "0.5"
-              memory: "256Mi"
+              memory: "128Mi"
             requests:
               cpu: "0.5"
-              memory: "256Mi"
+              memory: "128Mi"
           command: [ "python" ]
           args: [ "app/main.py" ]
           env:
             - name: API_CREDS
-              value: # placeholder update this
+              value: '<API_CREDS>' # placeholder update this
             - name: MONGO_CREDS
-              value: # placeholder update this
+              value: '<MONGO_CREDS>' # placeholder update this

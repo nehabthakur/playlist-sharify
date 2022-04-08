@@ -1,5 +1,8 @@
+import json
+
 from flask import Flask, Response, request
 from flask_httpauth import HTTPBasicAuth
+from pymongo.errors import PyMongoError
 
 from src.models.playlist import get_playlist, put_playlist, post_playlist, delete_playlist
 from src.models.song import get_song
@@ -7,6 +10,20 @@ from src.models.user import validate_user, sign_up_user
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
+
+
+@app.errorhandler(PyMongoError)
+def handle_mongo_error(pme):
+    response = pme.get_response()
+    response.data = json.dumps(
+        {
+            "code": pme.code,
+            "name": pme.name,
+            "description": pme.description
+        }
+    )
+    response.content_type = "application/json"
+    return response
 
 
 @auth.verify_password

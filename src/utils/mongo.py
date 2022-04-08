@@ -3,6 +3,7 @@ import logging
 from pymongo import MongoClient
 from pymongo.collection import Collection
 from pymongo.database import Database
+from pymongo.errors import PyMongoError
 
 
 class MongoHelper:
@@ -14,7 +15,10 @@ class MongoHelper:
         username = self._credentials['username']
         password = self._credentials['password']
         cluster_id = self._credentials['cluster_id']
-        return MongoClient(f"mongodb+srv://{username}:{password}@{cluster_id}")
+        try:
+            return MongoClient(f"mongodb+srv://{username}:{password}@{cluster_id}")
+        except PyMongoError as pme:
+            raise pme
 
     def list_databases(self) -> list[dict]:
         return [db for db in self._client.list_databases()]
