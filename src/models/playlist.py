@@ -1,3 +1,4 @@
+import logging
 from hashlib import md5
 
 from flask import Response, jsonify
@@ -70,7 +71,7 @@ def post_playlist(body: dict[str, str], mongo_creds: dict[str, str], api_creds: 
     if result is None:
         return Response("Invalid Playlist name", 400)
 
-    song_record = (song_details["_id"], song_details["track"], song_details["artist"])
+    song_record = [song_details["_id"], song_details["track"], song_details["artist"]]
 
     if op_type == "ADD":
         if song_record not in result["songs"]:
