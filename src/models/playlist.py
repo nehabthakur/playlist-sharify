@@ -70,10 +70,18 @@ def post_playlist(body: dict[str, str], mongo_creds: dict[str, str], api_creds: 
     if result is None:
         return Response("Invalid Playlist name", 400)
 
+    song_record = (song_details["_id"], song_details["track"], song_details["artist"])
+
     if op_type == "ADD":
-        result["songs"].append((song_details["_id"], song_details["track"], song_details["artist"]))
+        if song_record not in result["songs"]:
+            result["songs"].append(song_record)
+        else:
+            return Response("Song already exists in playlist", 409)
     else:
-        result["songs"].remove((song_details["_id"], song_details["track"], song_details["artist"]))
+        if song_record in result["songs"]:
+            result["songs"].remove(song_record)
+        else:
+            return Response("Song doesn't exist in playlist", 400)
 
     helper.insert_doc("playlist_db", "playlists", result)
     helper.close()
