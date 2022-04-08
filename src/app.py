@@ -1,7 +1,9 @@
-import json
+import logging
+from time import perf_counter
 
-from flask import Flask, Response, request
+from flask import Flask, Response, request, g as app_context
 from flask_httpauth import HTTPBasicAuth
+from gevent.pywsgi import WSGIHandler
 from pymongo.errors import PyMongoError
 
 from src.models.playlist import get_playlist, put_playlist, post_playlist, delete_playlist
@@ -14,15 +16,30 @@ auth = HTTPBasicAuth()
 
 @app.errorhandler(PyMongoError)
 def handle_mongo_error(pme):
-    response = pme.get_response()
-    response.data = json.dumps(
-        {
-            "code": pme.code,
-            "name": pme.name,
-            "description": pme.description
-        }
+    logging.info(f"{pme.code} - {pme.name} - {pme.description}")
+    return Response("INTERNAL SERVER ERROR", 503)
+
+
+@app.before_request
+def log_request():
+    app_context.start_time = perf_counter()
+    logging.info(f"{request.remote_addr} {request.method} {request.scheme} {request.full_path}")
+
+
+@app.after_request
+def log_response(response: WSGIHandler) -> WSGIHandler:
+    time_taken = (perf_counter() - app_context.start_time) * 1000
+    logging.info(
+        "%s %s %s %s - %s with %s took %ss",
+        request.remote_addr,
+        request.method,
+        request.scheme,
+        request.full_path,
+        response.status,
+        response.content_length,
+        time_taken
     )
-    response.content_type = "application/json"
+
     return response
 
 

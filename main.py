@@ -1,10 +1,20 @@
 import json
 import logging
 import os
+import sys
 
 from gevent.pywsgi import WSGIServer
 
 from src.app import app
+
+
+def init_logger():
+    logging.basicConfig(
+        stream=sys.stdout,
+        format="%(asctime)s %(levelname)-8s %(message)s",
+        level="INFO",
+        datefmt="%Y-%m-%d %H:%M:%S"
+    )
 
 
 def main():
@@ -18,4 +28,5 @@ def main():
 
 
 if __name__ == '__main__':
+    init_logger()
     main()
