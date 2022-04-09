@@ -1,4 +1,3 @@
-import logging
 from hashlib import md5
 
 from flask import Response, jsonify

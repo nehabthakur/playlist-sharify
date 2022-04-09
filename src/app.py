@@ -10,24 +10,40 @@ from src.models.playlist import get_playlist, put_playlist, post_playlist, delet
 from src.models.song import get_song
 from src.models.user import validate_user, sign_up_user
 
+# Initializing the flask application & basic authentication
 app = Flask(__name__)
 auth = HTTPBasicAuth()
 
 
 @app.errorhandler(PyMongoError)
-def handle_mongo_error(pme):
+def handle_mongo_error(pme) -> Response:
+    """
+        This method is for logging and handling any errors when communicating with MongoDB.
+
+    :param pme: PyMongoError
+    :return: Response object with 503 Resource unavailable
+    """
     logging.info(f"{pme.code} - {pme.name} - {pme.description}")
     return Response("INTERNAL SERVER ERROR", 503)
 
 
 @app.before_request
 def log_request():
+    """
+        This method is for logging every request made to the api
+    """
     app_context.start_time = perf_counter()
     logging.info(f"{request.remote_addr} {request.method} {request.scheme} {request.full_path}")
 
 
 @app.after_request
 def log_response(response: WSGIHandler) -> WSGIHandler:
+    """
+        This method is for logging every response made to the request to the api
+
+    :param response: WSGI Handler
+    :return: WSGI Handler
+    """
     time_taken = (perf_counter() - app_context.start_time) * 1000
     logging.info(
         "%s %s %s %s - %s with %s took %ss",
@@ -45,6 +61,9 @@ def log_response(response: WSGIHandler) -> WSGIHandler:
 
 @auth.verify_password
 def verify_password(username: str, password: str) -> bool:
+    """
+        This method will act as a decorator to authenticate user before the user's request is fulfilled.
+    """
     return validate_user(username, password, app.config['MONGO_CREDS'])
 
 
