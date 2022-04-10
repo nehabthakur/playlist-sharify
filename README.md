@@ -146,3 +146,7 @@ This will run the application using GKE autopilot on google cloud. Below are the
 ## Application Flow
 
 ![Application Flow](static/flow.png)
+
+## Testing
+
+1. Postman collections to test the flow of the rest api can be found [here](postman_collections/postman.json)
