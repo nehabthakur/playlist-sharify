@@ -56,7 +56,7 @@ It will then deploy the kubernetes config files defined in [tools/k8s/gke](tools
   - `name` should be part of the body json, shouldn't be empty and also should already be created.
 
 
-- PATCH on `/playlist`:  
+- POST on `/playlist`:  
   - This requires `Content-Type -> application/json` and basic auth `username` and `password` in the header.   
   - `name` should be part of the body json, shouldn't be empty and also should already be created.
   - `track` should be part of the body json, shouldn't be empty, should be valid.
