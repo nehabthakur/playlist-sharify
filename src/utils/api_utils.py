@@ -4,6 +4,9 @@ URL = "https://ws.audioscrobbler.com/2.0/?method=track.getInfo"
 
 
 def get_track_info(api_key: str, track: str, artist: str) -> dict[str, any]:
+    """
+        This method will fetch the song details from the last.fm external api
+    """
     track = track.replace(' ', '%20')
     artist = artist.replace(' ', '%20')
 

@@ -7,6 +7,13 @@ from src.utils.mongo import MongoHelper
 
 
 def get_playlist(body: dict[str, str], mongo_creds: dict[str, str]) -> Response:
+    """
+         Gets the playlist based on the name as input in the request body
+         1. Name shouldn't be empty, it will throw 400 Bad Request, if it does
+         2. It checks if the playlist exists in the mongodb `playlists` collection using the hashed id
+         3. If it doesn't exist, it will throw 400 Bad Request
+         4. If it does, the response will be in a json format
+    """
     name = body.get("name", "")
 
     if name == "":
@@ -23,6 +30,13 @@ def get_playlist(body: dict[str, str], mongo_creds: dict[str, str]) -> Response:
 
 
 def put_playlist(body: dict[str, str], mongo_creds: dict[str, str]) -> Response:
+    """
+        Creates a playlist using the name provided as input in the request body
+        1. Name shouldn't be empty, it will throw 400 Bad Request, if it does
+        2. It checks if the playlist exists in the mongodb `playlists` collection using the hashed id
+        3. If it does exist, it will throw 409 Conflict
+        4. If it does, the playlist is inserted to mongodb and response will be with status 200
+    """
     name = body.get("name", "")
 
     if name == "":
@@ -47,6 +61,18 @@ def put_playlist(body: dict[str, str], mongo_creds: dict[str, str]) -> Response:
 
 
 def post_playlist(body: dict[str, str], mongo_creds: dict[str, str], api_creds: dict[str, str]) -> Response:
+    """
+        Updates a playlist using name, track, song, operation type as input in the request body
+        1. Name, track, song, op_type shouldn't be empty, it will throw 400 Bad Request, if it does
+        2. op_type should be only `ADD` or `DELETE`, it will throw 400 Bad Request, if it doesn't
+        3. Check if the song exists in the songs collection or the external last.fm api
+        4. If it doesn't exist, it will throw 400 Bad Request
+        5. It checks if the playlist exists in the mongodb `playlists` collection using the hashed id
+        6. If it doesn't exist, it will throw 400 Bad Request
+        7. If the op_type is ADD, the song shouldn't exist in the playlist, else it will throw 409 conflict
+        8. If the op_type is DELETE, the song should exist in the playlist, else it will throw 400 Bad request
+        9. The final record with removed or added songs will be updated in mongodb playlists collection
+    """
     name = body.get("name", "")
     track = body.get("track", "")
     artist = body.get("artist", "")
@@ -89,6 +115,13 @@ def post_playlist(body: dict[str, str], mongo_creds: dict[str, str], api_creds: 
 
 
 def delete_playlist(body: dict[str, str], mongo_creds: dict[str, str]) -> Response:
+    """
+         DELETE the playlist based on the name as input in the request body
+         1. Name shouldn't be empty, it will throw 400 Bad Request, if it does
+         2. It checks if the playlist exists in the mongodb `playlists` collection using the hashed id
+         3. If it doesn't exist, it will throw 400 Bad Request
+         4. If it does, deletes the playlist, the response will be with status_code 200.
+    """
     name = body.get("name", "")
 
     if name == "":

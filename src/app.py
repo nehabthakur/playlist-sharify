@@ -69,12 +69,22 @@ def verify_password(username: str, password: str) -> bool:
 
 @app.route("/sign-up", methods=["PUT"])
 def sign_up() -> Response:
+    """
+        This method handles user signup process by calling the `sign_up_user` method
+    """
     return sign_up_user(request.get_json(), app.config['MONGO_CREDS'])
 
 
 @auth.login_required
 @app.route("/playlist", methods=["GET", "PUT", "POST", "DELETE"])
 def playlist() -> Response:
+    """
+        This method calls the below functions for the respective input rest methods for /playlist api call
+        - GET -> get_playlist
+        - PUT -> put_playlist
+        - POST -> post_playlist
+        - DELETE -> delete_playlist
+    """
     match request.method:
         case "GET":
             return get_playlist(request.get_json(), app.config['MONGO_CREDS'])
@@ -89,4 +99,7 @@ def playlist() -> Response:
 @auth.login_required
 @app.route("/song", methods=["GET"])
 def song() -> Response:
+    """
+        This method calls get_song method when a get request is made to \song
+    """
     return get_song(request.get_json(), app.config['MONGO_CREDS'], app.config["API_CREDS"])

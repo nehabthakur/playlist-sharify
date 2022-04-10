@@ -7,6 +7,14 @@ from src.utils.mongo import MongoHelper
 
 
 def get_song(body: dict[str, str], mongo_creds: dict[str, str], api_creds: dict[str, str]) -> Response:
+    """
+        This method will return the song details either from last.fm external api or the mongodb songs collection
+        1. If the input doesn't contain track, artist, throws 400 Bad Request
+        2. If the song already exists in mongodb songs collection, returns the document
+        3. Else Gets the song details from last.fm external api
+        4. If the song doesn't exist, it will throw a 400 Bad Request error
+        5. Else inserts the transformed record in songs collection
+    """
     track = body.get("track", "")
     artist = body.get("artist", "")
 
