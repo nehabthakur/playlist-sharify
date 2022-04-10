@@ -37,10 +37,6 @@ It will then deploy the kubernetes config files defined in [tools/k8s/gke](tools
 
 ![Architecture diagram](static/architecture.png)
 
-## Application Flow
-
-![Application Flow](static/flow.png)
-
 ## Methods
 - PUT on `/sign-up`:   
   - This requires `Content-Type -> application/json` in the header.   
@@ -146,3 +142,7 @@ This will run the application using GKE autopilot on google cloud. Below are the
 6. Enable Access to `GKE` and `Secret Manager` in [Cloud Build](https://console.cloud.google.com/cloud-build/settings/service-account) settings
 7. Deploy and start the service either by pushing a new commit or running the cloud build trigger [manually](https://console.cloud.google.com/cloud-build/triggers)
 8. Access the app by opening the endpoint in `playlist-sharify-service` in [GKE Services Page](https://console.cloud.google.com/kubernetes/discovery)
+
+## Application Flow
+
+![Application Flow](static/flow.png)
