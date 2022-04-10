@@ -1,0 +1,700 @@
+{
+  "info": {
+    "_postman_id": "0f3985af-8809-41b1-985e-89e1b5597672",
+    "name": "Playlist Sharify Test",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Sign up",
+      "item": [
+        {
+          "name": "Empty Body",
+          "_postman_id": "8e83ed9a-9aae-4f90-be53-2b32588e5f5f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/sign-up"
+          },
+          "response": []
+        },
+        {
+          "name": "Invalid Username",
+          "_postman_id": "7e9daf30-5f92-46f3-8026-1d62711e6f20",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"neha\",\r\n    \"password\": \"sadasdsa/.21321./312FSDFS\",\r\n    \"name\": \"Neha Thakur\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/sign-up"
+          },
+          "response": []
+        },
+        {
+          "name": "Invalid Password",
+          "_postman_id": "f5cd157e-c2b8-43a6-9a39-072d2b342edc",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"neha_thakur\",\r\n    \"password\": \"TryHackMe\",\r\n    \"name\": \"Neha Thakur\"\r\n}\r\n",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/sign-up"
+          },
+          "response": []
+        },
+        {
+          "name": "Valid Sign-up",
+          "_postman_id": "aa194178-d388-478f-b6bb-663ab87f0052",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"neha_thakur\",\r\n    \"password\": \"dasdsa211\\\"£fdsfFD\",\r\n    \"name\": \"Neha Thakur\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/sign-up"
+          },
+          "response": []
+        },
+        {
+          "name": "User already exists",
+          "_postman_id": "74a95f3f-458a-421a-9f80-1fa98146aa2e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"neha_thakur\",\r\n    \"password\": \"dasdsa211\\\"£fdsfFD\",\r\n    \"name\": \"Neha Thakur\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/sign-up"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "7cd749d7-b601-42b6-b02e-8700fafdad53"
+    },
+    {
+      "name": "Playlist PUT",
+      "item": [
+        {
+          "name": "Valid request",
+          "_postman_id": "08c67472-7518-4f23-89ef-a66ba96612c5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": {
+                "password": "dasdsa211\\\"£fdsfFD",
+                "username": "neha_thakur"
+              }
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Kanye West\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/playlist"
+          },
+          "response": []
+        },
+        {
+          "name": "Valid Request",
+          "_postman_id": "cdd013fd-ed00-4422-82ac-e52a4a8cc689",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": {
+                "password": "dasdsa211\\\"£fdsfFD",
+                "username": "neha_thakur"
+              }
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Taylor Swift\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/playlist"
+          },
+          "response": []
+        },
+        {
+          "name": "Playlist already exist",
+          "_postman_id": "a9ce462a-0412-43be-bc56-415f94f7ff3b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": {
+                "password": "dasdsa211\\\"£fdsfFD",
+                "username": "neha_thakur"
+              }
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Kanye West\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/playlist"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "603de688-e60f-40c1-8135-40797bc812f9"
+    },
+    {
+      "name": "Playlist POST",
+      "item": [
+        {
+          "name": "Playlist doesn't exist",
+          "_postman_id": "f514a4f9-44b6-4f64-8830-3502fbe5abb9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": {
+                "password": "dasdsa211\\\"£fdsfFD",
+                "username": "neha_thakur"
+              }
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Kanye West1\",\r\n    \"track\": \"The College Dropout\",\r\n    \"artist\": \"Kanye West\",\r\n    \"op_type\": \"ADD\"\r\n}\r\n",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/playlist"
+          },
+          "response": []
+        },
+        {
+          "name": "Valid Request - ADD",
+          "_postman_id": "77255e5a-dde7-4820-ba33-57853877a8f5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": {
+                "password": "dasdsa211\\\"£fdsfFD",
+                "username": "neha_thakur"
+              }
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Kanye West\",\r\n    \"track\": \"The College Dropout\",\r\n    \"artist\": \"Kanye West\",\r\n    \"op_type\": \"ADD\"\r\n}\r\n",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/playlist"
+          },
+          "response": []
+        },
+        {
+          "name": "Valid Request - ADD",
+          "_postman_id": "2ad2625a-f327-4f96-8747-96befe14f187",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": {
+                "password": "dasdsa211\\\"£fdsfFD",
+                "username": "neha_thakur"
+              }
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Kanye West\",\r\n    \"track\": \"All of the lights\",\r\n    \"artist\": \"Kanye West\",\r\n    \"op_type\": \"ADD\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/playlist"
+          },
+          "response": []
+        },
+        {
+          "name": "Song already exists",
+          "_postman_id": "6bca1eaa-d6a9-4d24-9161-72523d5619fa",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": {
+                "password": "dasdsa211\\\"£fdsfFD",
+                "username": "neha_thakur"
+              }
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Kanye West\",\r\n    \"track\": \"All of the lights\",\r\n    \"artist\": \"Kanye West\",\r\n    \"op_type\": \"ADD\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/playlist"
+          },
+          "response": []
+        },
+        {
+          "name": "Valid Request - DELETE",
+          "_postman_id": "42b7f062-c830-442e-b3de-59eee146b080",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": {
+                "password": "dasdsa211\\\"£fdsfFD",
+                "username": "neha_thakur"
+              }
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Kanye West\",\r\n    \"track\": \"All of the lights\",\r\n    \"artist\": \"Kanye West\",\r\n    \"op_type\": \"DELETE\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/playlist"
+          },
+          "response": []
+        },
+        {
+          "name": "Song doesn't exist",
+          "_postman_id": "7ba2e357-23d9-4130-b12b-1ae55c03bdc1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": {
+                "password": "dasdsa211\\\"£fdsfFD",
+                "username": "neha_thakur"
+              }
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Kanye West\",\r\n    \"track\": \"All of the lights\",\r\n    \"artist\": \"Kanye West\",\r\n    \"op_type\": \"DELETE\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/playlist"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "717d628c-3c7a-4817-970a-208dd968a9a5"
+    },
+    {
+      "name": "Playlist GET",
+      "item": [
+        {
+          "name": "Valid Request",
+          "_postman_id": "871856b7-1cc3-446a-b8fe-f61d049c5b3e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": {
+                "password": "dasdsa211\\\"£fdsfFD",
+                "username": "neha_thakur"
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Kanye West\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/playlist"
+          },
+          "response": []
+        },
+        {
+          "name": "Playlist doesn't exist",
+          "_postman_id": "18492aa5-67f4-43bb-bf85-3de12ba443e1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": {
+                "password": "dasdsa211\\\"£fdsfFD",
+                "username": "neha_thakur"
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Kanye West1\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/playlist"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "9e57c344-aa0e-48f3-ac5b-658bc6b1068b"
+    },
+    {
+      "name": "Playlist DELETE",
+      "item": [
+        {
+          "name": "Valid Request",
+          "_postman_id": "48d0f48f-13ec-4e45-a493-d082c98a3af7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": {
+                "password": "dasdsa211\\\"£fdsfFD",
+                "username": "neha_thakur"
+              }
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Taylor Swift\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/playlist"
+          },
+          "response": []
+        },
+        {
+          "name": "Playlist Doesn't exist",
+          "_postman_id": "16fc3a87-6a23-4ae2-bd73-66e2ed59b7f6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": {
+                "password": "dasdsa211\\\"£fdsfFD",
+                "username": "neha_thakur"
+              }
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Taylor Swift\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/playlist"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "30656819-0e10-480d-b907-d4732f045868"
+    },
+    {
+      "name": "Song",
+      "item": [
+        {
+          "name": "Valid Request",
+          "_postman_id": "81377eb7-4eb5-4485-8abe-317adfe7f494",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": {
+                "password": "dasdsa211\\\"£fdsfFD",
+                "username": "neha_thakur"
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"track\": \"All of the lights\",\r\n    \"artist\": \"Kanye West\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/song"
+          },
+          "response": []
+        },
+        {
+          "name": "Invalid Song",
+          "_postman_id": "22fb485c-b5d0-476a-ae19-1cdae66c0055",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": {
+                "password": "dasdsa211\\\"£fdsfFD",
+                "username": "neha_thakur"
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"track\": \"All of the lights21213321\",\r\n    \"artist\": \"Kanye West321321321321\"\r\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "http://{{PLAYLIST_SHARIFY}}/song"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "2f49357c-90c4-4c04-ab8d-161a921b9eb1"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "d1ffcb0c-858b-49a1-aaef-42f7e7ca1cef",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "bb5cd50f-06f8-49e4-aad6-c634cb77367c",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "9c37c3fb-6b91-40e4-b7ba-83d8b8b7f8a7",
+      "key": "PLAYLIST_SHARIFY",
+      "value": "35.190.193.203:5000",
+      "type": "string"
+    }
+  ]
+}
